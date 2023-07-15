@@ -34,8 +34,8 @@
       }
     );
 
-    overlays.default = (import ./nix/overlays.nix {}) // {
-      default = self.overlays;
+    overlays = (import ./nix/overlays.nix {}) // {
+      default = self.overlays.sddm-sugar-candy-nix;
     };
 
     nixosModules.default = import ./nix/module.nix inputs;

@@ -383,7 +383,14 @@ in
       theme = "sddm-sugar-candy-nix";
     };
 
-    environment.systemPackages = [ cfg.package ];
+    environment.systemPackages = with pkgs.libForQt5; [
+      cfg.package
+      sddm
+      qtgraphicaleffects
+      qtquickcontrols2
+      qtsvg
+      qtbase
+    ];
   };
 }
 

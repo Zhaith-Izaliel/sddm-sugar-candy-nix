@@ -2,8 +2,7 @@ inputs: { config, lib, pkgs, ... }:
 
 with lib; let
   cfg = config.services.xserver.displayManager.sddm.sugarCandy;
-  defaultSugarCandyPackage =
-    inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  defaultSugarCandyPackage = inputs.self.packages.default;
   mkTranslationOption = name: example: mkOption {
     default = "";
     inherit example;

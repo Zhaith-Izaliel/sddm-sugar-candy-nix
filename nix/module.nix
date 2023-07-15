@@ -1,8 +1,9 @@
-{ inputs, system }: { config, lib, pkgs, ... }:
+inputs: { config, lib, pkgs, ... }:
 
 with lib; let
   cfg = config.services.xserver.displayManager.sddm.sugarCandy;
-  defaultSugarCandyPackage = inputs.self.packages."${system}".default;
+  defaultSugarCandyPackage =
+    inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.default;
   mkTranslationOption = name: example: mkOption {
     default = "";
     inherit example;

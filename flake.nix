@@ -11,6 +11,7 @@
     nixpkgs,
     ...
   }: let
+    lib = nixpkgs.lib;
     genSystems = lib.genAttrs [
       # Add more systems if they are supported
       "aarch64-linux"
@@ -37,7 +38,7 @@
       default = self.overlays;
     };
 
-    nixosModules.default = import ./nix/module.nix {inherit inputs system; };
+    nixosModules.default = import ./nix/module.nix inputs;
   };
 }
 

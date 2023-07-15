@@ -103,7 +103,7 @@ in
         description = "Set the strength of the blur effect. Anything above 100
         is pretty strong and might slow down the rendering time. 0 is like
         setting false for any blur.";
-        type = types.unsigned;
+        type = types.ints.unsigned;
       };
 
       HaveFormBackground = mkOption {
@@ -197,7 +197,7 @@ in
         user and session selection background. Decrease or increase if it looks
         bad on your background. Initial render can be slow for values above
         5-7.";
-        type = types.unsigned;
+        type = types.ints.unsigned;
       };
 
       InterfaceShadowOpacity = mkOption {
@@ -215,7 +215,7 @@ in
         description = "Integer in pixels. Radius of the input fields and the
         login button. Empty for square. Can cause bad antialiasing of the
         fields.";
-        type = types.unsigned;
+        type = types.ints.unsigned;
       };
 
       ScreenPadding = mkOption {
@@ -224,7 +224,7 @@ in
         description = "Integer in pixels. Increase or set this to 0 to have a
         padding of color BackgroundColor all around your screen. This makes your
         login greeter appear as if it was a canvas.";
-        type = types.unsigned;
+        type = types.ints.unsigned;
       };
 
       Font = mkOption {

@@ -11,7 +11,10 @@ with lib; let
   mkThemeConf = settings:
   let
     configStrings = attrsets.mapAttrsToList ( name: value:
-      "${name} = \"${toString value}\"\n" ) settings;
+    "${name} = \"${if builtins.isString value
+      then value
+      else toString value
+    }\"\n" ) settings;
   in
     strings.concatStrings ( [ "[General]\n\n" ] ++ configStrings );
   defaultPackage =
@@ -121,7 +124,7 @@ in
         example = "left";
         description = "Position of the form which takes roughly 1/3 of screen
         estate. Can be left, center or right.";
-        type = types.oneOf [ "center" "left" "right" ];
+        type = types.enum [ "center" "left" "right" ];
       };
 
       BackgroundImageHAlignment = mkOption {
@@ -132,7 +135,7 @@ in
         HaveFormBackground is set to true and FormPosition is either left or
         right. Can be left, center or right; defaults to center if none is
         passed";
-        type = types.oneOf [ "center" "left" "center" ];
+        type = types.enum [ "center" "left" "center" ];
       };
 
       BackgroundImageVAlignment = mkOption {
@@ -143,7 +146,7 @@ in
         HaveFormBackground is set to true and FormPosition is either left or
         right. Can be left, center or right; defaults to center if none is
         passed";
-        type = types.oneOf [ "center" "left" "right" ];
+        type = types.enum [ "center" "left" "right" ];
       };
 
       MainColor = mkOption {

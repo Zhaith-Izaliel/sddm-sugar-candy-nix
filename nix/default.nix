@@ -23,11 +23,8 @@ stdenv.mkDerivation rec {
     src = lib.cleanSource ../.;
   };
 
-  nativeBuildInputs = [
-    toybox
-  ];
-
   buildInputs = with libsForQt5; [
+    toybox
     sddm
     qtgraphicaleffects
     qtquickcontrols2

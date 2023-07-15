@@ -37,20 +37,20 @@ in
   options.services.xserver.displayManager.sddm.sugarCandy = {
     enable = mkEnableOption "SDDM Sugar Candy Theme";
 
-    package = mkOption {
-      default = defaultPackage;
-      defaultText = literalExpression ''
-
-      '';
-      example = literalExpression "pkgs.sddm-sugar-candy-nix";
-      description = mdDoc ''
-        The SDDM Sugar Candy Theme to use.
-        Setting this option will make
-        {option}`services.xserver.displayManager.sddm.sugarCandy.settings` not
-        work.
-      '';
-      type = types.path;
-    };
+    # package = mkOption {
+    #   default = defaultPackage;
+    #   defaultText = literalExpression ''
+    #
+    #   '';
+    #   example = literalExpression "pkgs.sddm-sugar-candy-nix";
+    #   description = mdDoc ''
+    #     The SDDM Sugar Candy Theme to use.
+    #     Setting this option will make
+    #     {option}`services.xserver.displayManager.sddm.sugarCandy.settings` not
+    #     work.
+    #   '';
+    #   type = types.path;
+    # };
 
     settings = {
       Background = mkOption {
@@ -386,7 +386,7 @@ in
     };
 
     environment.systemPackages = with pkgs.libsForQt5; [
-      cfg.package
+      defaultPackage
       sddm
       qtgraphicaleffects
       qtquickcontrols2

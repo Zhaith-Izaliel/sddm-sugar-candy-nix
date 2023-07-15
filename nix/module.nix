@@ -28,7 +28,7 @@ with lib; let
   # Final Package
   defaultPackage =
     inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
-      themeConf = theme-conf-file;
+      themeConf = "${theme-conf-file}";
     };
 in
 {

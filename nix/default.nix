@@ -39,7 +39,7 @@ stdenv.mkDerivation rec {
 
     # Applying theme
     ${if themeConf != ""
-      then "$installDir/theme.conf < cat \"${themeConf}\""
+      then "cat \"${builtins.trace themeConf themeConf}\" > $installDir/theme.conf"
       else ""
     }
   '';

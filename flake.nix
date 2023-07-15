@@ -8,7 +8,7 @@
 
   outputs = inputs: with inputs;
   let
-    pkgs = import nixpkgs { inherit system; };
+    pkgs = nixpkgs.legacyPackages."${system}";
     props = builtins.fromJSON (builtins.readFile ./props.json);
     system = "x86_64-linux";
   in

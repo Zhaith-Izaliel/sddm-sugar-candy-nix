@@ -16,6 +16,8 @@ with lib; let
     configStrings = attrsets.mapAttrsToList ( name: value:
     "${name} = \"${if builtins.isString value
       then value
+      else if builtins.isBool value
+      then boolToString value
       else toString value
     }\"\n" ) settings;
   in

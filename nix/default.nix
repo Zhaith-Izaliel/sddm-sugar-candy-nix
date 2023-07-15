@@ -10,6 +10,8 @@ stdenv.mkDerivation rec {
   pname = "sddm-sugar-candy-nix";
   inherit version;
 
+  dontWrapQtApps = true;
+
   src = lib.cleanSourceWith {
     filter = name: type: let
       baseName = baseNameOf (toString name);

@@ -52,8 +52,8 @@ in
 
     settings = {
       Background = mkOption {
-        default = Backgrounds/Mountain.jpg;
-        example = Backgrounds/Mountain.jpg;
+        default = ../Backgrounds/Mountain.jpg;
+        example = ../Backgrounds/Mountain.jpg;
         description = ''Set the theme background. Must be a path.
         Most standard image file formats are allowed including support for transparency. (e.g. background.jpeg/illustration.GIF/Foto.png/undraw.svgz)"
         '';

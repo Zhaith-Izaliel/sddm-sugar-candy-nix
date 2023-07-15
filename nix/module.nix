@@ -2,8 +2,6 @@ inputs: { config, lib, pkgs, ... }:
 
 with lib; let
   cfg = config.services.xserver.displayManager.sddm.sugarCandy;
-  defaultSugarCandyPackage =
-    inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.default;
   mkTranslationOption = name: example: mkOption {
     default = "";
     inherit example;
@@ -16,10 +14,29 @@ with lib; let
       "${name} = \"${toString value}\"\n" ) settings;
   in
     strings.concatStrings ( [ "[General]\n\n" ] ++ configStrings );
+  defaultPackage =
+    inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
+      themeConf = mkThemeConf cfg.settings;
+    };
 in
 {
   options.services.xserver.displayManager.sddm.sugarCandy = {
     enable = mkEnableOption "SDDM Sugar Candy Theme";
+
+    package = mkOption {
+      default = defaultPackage;
+      defaultText = literalExpression ''
+
+      '';
+      example = literalExpression "pkgs.sddm-sugar-candy-nix";
+      description = mdDoc ''
+        The SDDM Sugar Candy Theme to use.
+        Setting this option will make
+        {option}`services.xserver.displayManager.sddm.sugarCandy.settings` not
+        work.
+      '';
+      type = types.path;
+    };
 
     settings = {
       Background = mkOption {
@@ -354,11 +371,7 @@ in
       theme = "sddm-sugar-candy-nix";
     };
 
-    environment.systemPackages = [
-      defaultSugarCandyPackage.override {
-        themeConf = mkThemeConf cfg.settings;
-      }
-    ];
+    environment.systemPackages = [ cfg.package ];
   };
 }
 

@@ -2,6 +2,7 @@
   libsForQt5,
   stdenv,
   lib,
+  toybox,
   version ? "git",
   themeConf ? "",
 }:
@@ -21,6 +22,10 @@ stdenv.mkDerivation rec {
     );
     src = lib.cleanSource ../.;
   };
+
+  nativeBuildInputs = [
+    toybox
+  ];
 
   buildInputs = with libsForQt5; [
     sddm

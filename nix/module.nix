@@ -1,4 +1,4 @@
-inputs: { config, lib, pkgs, ... }:
+{ inputs, system }: { config, lib, pkgs, ... }:
 
 with lib; let
   cfg = config.services.xserver.displayManager.sddm.sugarCandy;

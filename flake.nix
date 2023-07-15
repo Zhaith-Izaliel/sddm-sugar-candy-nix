@@ -1,5 +1,6 @@
 {
-  description = "A very basic flake";
+  description = "A flake to install and configure the SDDM Sugar Candy theme on
+  NixOS";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -20,7 +21,7 @@
       sddm-sugar-candy-nix = packages."${system}".default;
     };
 
-    nixosModules.default = import ./nix/module.nix inputs;
+    nixosModules.default = import ./nix/module.nix {inherit inputs system; };
   };
 }
 

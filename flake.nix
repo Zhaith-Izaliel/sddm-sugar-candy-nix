@@ -8,13 +8,13 @@
 
   outputs = inputs: with inputs;
   flake-utils.lib.eachDefaultSystem (system:
-  with import nixpkgs { inherit system; };
   let
+    pkgs = import nixpkgs { inherit system; };
     props = builtins.fromJSON (builtins.readFile ./props.json);
   in
     rec {
-      packages.default = callPackage ./nix {
-          inherit (props) version;
+      packages.default = pkgs.callPackage ./nix {
+        version = props.version;
       };
 
       overlays.default = final: prev: {

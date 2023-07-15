@@ -1,16 +1,12 @@
 {
-  sddm,
-  qtgraphicaleffects,
-  qtquickcontrols2,
-  qtsvg,
-  qtbase,
-  mkDerivation,
+  libsForQt5,
+  stdenv,
   lib,
   version ? "git",
   themeConf ? "",
 }:
 
-mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "sddm-sugar-candy-nix";
   inherit version;
 
@@ -24,7 +20,7 @@ mkDerivation rec {
     src = lib.cleanSource ../.;
   };
 
-  buildInputs = [
+  buildInputs = with libsForQt5; [
     sddm
     qtgraphicaleffects
     qtquickcontrols2

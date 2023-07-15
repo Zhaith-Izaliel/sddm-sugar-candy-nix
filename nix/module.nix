@@ -22,8 +22,8 @@ with lib; let
     strings.concatStrings ( [ "[General]\n\n" ] ++ configStrings );
 
   # Theme configuration file after generation
-  theme-conf-file = pkgs.writeText "sddm-sugar-candy-nix.conf" mkThemeConf
-    cfg.settings;
+  theme-conf-file = pkgs.writeText "sddm-sugar-candy-nix.conf" (mkThemeConf
+    cfg.settings);
 
   # Final Package
   defaultPackage =

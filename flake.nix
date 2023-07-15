@@ -6,19 +6,35 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = inputs: with inputs;
-  let
-    pkgs = nixpkgs.legacyPackages."${system}";
-    props = builtins.fromJSON (builtins.readFile ./props.json);
-    system = "x86_64-linux";
-  in
-  rec {
-    packages."${system}".default = pkgs.callPackage ./nix {
-      version = props.version;
-    };
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    ...
+  }: let
+    genSystems = lib.genAttrs [
+      # Add more systems if they are supported
+      "aarch64-linux"
+      "x86_64-linux"
+    ];
 
-    overlays.default = final: prev: {
-      sddm-sugar-candy-nix = packages."${system}".default;
+    pkgsFor = genSystems (system:
+      import nixpkgs {
+        inherit system;
+        overlays = [
+          self.overlays.sddm-sugar-candy-nix
+        ];
+      });
+  in
+  {
+    packages = genSystems (system:
+      (self.overlays.default pkgsFor.${system} pkgsFor.${system})
+      // {
+        default = self.packages.${system}.sddm-sugar-candy-nix;
+      }
+    );
+
+    overlays.default = (import ./nix/overlays.nix {}) // {
+      default = self.overlays;
     };
 
     nixosModules.default = import ./nix/module.nix {inherit inputs system; };

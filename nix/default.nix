@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
     src = lib.cleanSource ../.;
   };
 
-  buildInputs = with libsForQt5; [
+  nativeBuildInputs = with libsForQt5; [
     coreutils
     sddm
     qtgraphicaleffects
@@ -38,7 +38,7 @@ stdenv.mkDerivation rec {
     cp -aR . $installDir
 
     # Applying theme
-    cat "${builtins.trace "path: ${themeConf}" themeConf}" > "$installDir/theme.conf"
+    cat "${themeConf}" > "$installDir/theme.conf"
   '';
 }
 

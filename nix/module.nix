@@ -14,7 +14,7 @@ with lib; let
   mkThemeConf = settings:
   let
     configStrings = attrsets.mapAttrsToList ( name: value:
-    "${name} = \"${if builtins.isString value
+    "${name}=\"${if builtins.isString value
       then value
       else if builtins.isBool value
       then boolToString value

@@ -1,6 +1,7 @@
 inputs: { config, lib, pkgs, ... }:
 
 with lib; let
+  # Config
   cfg = config.services.xserver.displayManager.sddm.sugarCandy;
   mkTranslationOption = name: example: mkOption {
     default = "";
@@ -8,6 +9,8 @@ with lib; let
     description = "Add a translation for ${name}.";
     type = types.str;
   };
+
+  # Theme configuration generator
   mkThemeConf = settings:
   let
     configStrings = attrsets.mapAttrsToList ( name: value:
@@ -17,9 +20,15 @@ with lib; let
     }\"\n" ) settings;
   in
     strings.concatStrings ( [ "[General]\n\n" ] ++ configStrings );
+
+  # Theme configuration file after generation
+  theme-conf-file = pkgs.writeText "sddm-sugar-candy-nix.conf" mkThemeConf
+    cfg.settings;
+
+  # Final Package
   defaultPackage =
     inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
-      themeConf = mkThemeConf cfg.settings;
+      themeConf = theme-conf-file;
     };
 in
 {

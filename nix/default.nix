@@ -4,7 +4,7 @@
   lib,
   coreutils,
   version ? "git",
-  themeConf ? "",
+  themeConf ? ../theme.conf,
 }:
 
 stdenv.mkDerivation rec {
@@ -38,10 +38,7 @@ stdenv.mkDerivation rec {
     cp -aR . $installDir
 
     # Applying theme
-    ${if themeConf != ""
-      then "cat \"${builtins.trace themeConf themeConf}\" > $installDir/theme.conf"
-      else ""
-    }
+    cat "${builtins.trace "path: ${themeConf}" themeConf}" > "$installDir/theme.conf"
   '';
 }
 

@@ -19,7 +19,7 @@ with lib; let
       else if builtins.isBool value
       then boolToString value
       else toString value
-    }\"\n" ) settings;
+    }\"\n\n" ) settings;
   in
     strings.concatStrings ( [ "[General]\n\n" ] ++ configStrings );
 

@@ -2,7 +2,7 @@
   libsForQt5,
   stdenv,
   lib,
-  toybox,
+  coreutils,
   version ? "git",
   themeConf ? "",
 }:
@@ -24,7 +24,7 @@ stdenv.mkDerivation rec {
   };
 
   buildInputs = with libsForQt5; [
-    toybox
+    coreutils
     sddm
     qtgraphicaleffects
     qtquickcontrols2

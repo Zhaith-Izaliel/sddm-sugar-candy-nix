@@ -37,7 +37,7 @@ stdenv.mkDerivation rec {
 
     # Applying theme
     ${if themeConf != ""
-      then "$installDir/theme.conf < ${themeConf}"
+      then "$installDir/theme.conf < \"${themeConf}\""
       else ""
     }
   '';

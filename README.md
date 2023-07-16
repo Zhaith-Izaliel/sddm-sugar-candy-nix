@@ -42,7 +42,7 @@ containing your NixOS configuration:
 inputs = {
   # ---Snip---
   sddm-sugar-candy-nix = {
-    url = "";
+    url = "gitlab:Zhaith-Izaliel/sddm-sugar-candy-nix";
     # Optional, by default this flake follows nixpkgs-unstable.
     inputs.nixpkgs.follows = "nixpkgs";
   };

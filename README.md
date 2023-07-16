@@ -14,8 +14,7 @@ convenience.
 As of today, the package **does not work properly** due to some dependencies not
 being available to SDDM when loading the theme.
 
-If you know how to fix this, feel free to make a pull request following the
-contribution guidelines.
+If you know how to fix this, feel free to make a pull request
 
 ## Table of content
 
@@ -109,7 +108,7 @@ are imperfect. Hence, there are some caveats to take into considerations:
    package as is.
 
 If you have any idea on how to fix these issues, please, feel free to make a
-Pull Request following the contribution guidelines. Thank you.
+Pull Request. Thank you 💕
 
 ## Configuration
 

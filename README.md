@@ -124,17 +124,25 @@ After installing the module, Sugar Candy can be configured by setting its
 configuration options in the given module:
 
 ```nix
-{ ... }:
+{ lib, ... }:
 
 {
   services.xserver = {
     enable = true;
 
-    displayManager.sddm.sugarCandy = {
+    displayManager.sddm.sugarCandyNix = {
       enable = true; # This enables SDDM automatically and set its theme to
                      # "sddm-sugar-candy-nix"
       settings = {
         # Set your configuration options here.
+        # Here is a simple example:
+        Background = lib.cleanSource ./background.png;
+        ScreenWidth = 1920;
+        ScreenHeight = 1080;
+        FormPosition = "left";
+        HaveFormBackground = true;
+        PartialBlur = true;
+        # ...
       };
     };
   };

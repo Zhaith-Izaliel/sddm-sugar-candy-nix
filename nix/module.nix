@@ -2,7 +2,7 @@ inputs: { config, lib, pkgs, ... }:
 
 with lib; let
   # Config
-  cfg = config.services.xserver.displayManager.sddm.sugarCandy;
+  cfg = config.services.xserver.displayManager.sddm.sugarCandyNix;
   mkTranslationOption = name: example: mkOption {
     default = "";
     inherit example;
@@ -34,7 +34,7 @@ with lib; let
     };
 in
 {
-  options.services.xserver.displayManager.sddm.sugarCandy = {
+  options.services.xserver.displayManager.sddm.sugarCandyNix = {
     enable = mkEnableOption "SDDM Sugar Candy Theme";
 
     # package = mkOption {

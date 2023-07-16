@@ -11,11 +11,6 @@ This fork aims to provide a NixOS module to customize the theme using its
 impressive number of variables as well as a package to install it at your
 convenience.
 
-As of today, the package **does not work properly** due to some dependencies not
-being available to SDDM when loading the theme.
-
-If you know how to fix this, feel free to make a pull request
-
 ## Table of content
 
 <!-- vim-markdown-toc GitLab -->
@@ -93,19 +88,6 @@ are imperfect. Hence, there are some caveats to take into considerations:
    containing your configuration leading to **a complete rebuild and download of
    the theme**. I advise you to run `nix-collect-garbage` when testing some
    configurations of the theme as it will steadily fill up your Nix store.
-
-2. SDDM complains about not having certain dependencies available when using the
-   theme. To fix that, I had to make the module install them globally in
-   `environment.systemPackages`. Here is the list of dependencies installed
-   globally to make the theme work:
-   * `pkgs.libsForQt5.sddm`
-   * `pkgs.libsForQt5.qtgraphicaleffects`
-   * `pkgs.libsForQt5.qtquickcontrols2`
-   * `pkgs.libsForQt5.qtsvg`
-   * `pkgs.libsForQt5.qtbase`
-
-   This means you will have to install them yourself if you want to only use the
-   package as is.
 
 If you have any idea on how to fix these issues, please, feel free to make a
 Pull Request. Thank you 💕

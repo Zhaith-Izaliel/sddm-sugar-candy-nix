@@ -23,13 +23,16 @@ stdenv.mkDerivation rec {
     src = lib.cleanSource ../.;
   };
 
-  nativeBuildInputs = with libsForQt5; [
-    coreutils
+  propagatedUserEnvPkgs = with libsForQt5; [
     sddm
+    qtbase
+    qtsvg
     qtgraphicaleffects
     qtquickcontrols2
-    qtsvg
-    qtbase
+  ];
+
+  nativeBuildInputs = [
+    coreutils
   ];
 
   installPhase = ''

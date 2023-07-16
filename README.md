@@ -99,11 +99,11 @@ are imperfect. Hence, there are some caveats to take into considerations:
    theme. To fix that, I had to make the module install them globally in
    `environment.systemPackages`. Here is the list of dependencies installed
    globally to make the theme work:
-   * `sddm`
-   * `qtgraphicaleffects`
-   * `qtquickcontrols2`
-   * `qtsvg`
-   * `qtbase`
+   * `pkgs.libsForQt5.sddm`
+   * `pkgs.libsForQt5.qtgraphicaleffects`
+   * `pkgs.libsForQt5.qtquickcontrols2`
+   * `pkgs.libsForQt5.qtsvg`
+   * `pkgs.libsForQt5.qtbase`
 
    This means you will have to install them yourself if you want to only use the
    package as is.

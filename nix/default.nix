@@ -23,7 +23,7 @@ stdenv.mkDerivation rec {
     src = lib.cleanSource ../.;
   };
 
-  propagatedUserEnvPkgs = with libsForQt5; [
+  propagatedBuildInputs = with libsForQt5; [
     sddm
     qtbase
     qtsvg

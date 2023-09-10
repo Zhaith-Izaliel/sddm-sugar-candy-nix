@@ -1,8 +1,12 @@
 {
-  libsForQt5,
   stdenv,
   lib,
   coreutils,
+  sddm,
+  qtbase,
+  qtsvg,
+  qtquickcontrols2,
+  qtgraphicaleffects,
   version ? "git",
   themeConf ? ../theme.conf,
 }:
@@ -23,8 +27,8 @@ stdenv.mkDerivation rec {
     src = lib.cleanSource ../.;
   };
 
-  propagatedBuildInputs = with libsForQt5.qt5; [
-    libsForQt5.sddm
+  propagatedUserEnvPkgs = [
+    sddm
     qtbase
     qtsvg
     qtgraphicaleffects

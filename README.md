@@ -1,4 +1,3 @@
-
 ![Screenshot of the interface of the Sugar Candy theme for SDDM](Previews/PartialBlur.png "The default interface of the Sugar Candy theme for SDDM")
 
 # Sugar Candy login theme for SDDM on NixOS
@@ -15,18 +14,18 @@ convenience.
 
 <!-- vim-markdown-toc GitLab -->
 
-* [Installation](#installation)
-* [Caveats](#caveats)
-* [Configuration](#configuration)
-* [Examples](#examples)
-* [Legal Notice](#legal-notice)
+- [Installation](#installation)
+- [Caveats](#caveats)
+- [Configuration](#configuration)
+- [Examples](#examples)
+- [Legal Notice](#legal-notice)
 
 <!-- vim-markdown-toc -->
 
 ## Installation
 
 To install it you **must have flake enabled** and your NixOS configuration
-**must be managed with flakes.** See [https://nixos.wiki/wiki/Flakes] for
+**must be managed with flakes.** See \[https://nixos.wiki/wiki/Flakes\] for
 instructions on how to install and enable them on NixOS.
 
 Next, you can add this flake as inputs in `flake.nix` in the repository
@@ -108,10 +107,7 @@ configuration options in the given module:
 { lib, ... }:
 
 {
-  services.xserver = {
-    enable = true;
-
-    displayManager.sddm.sugarCandyNix = {
+  services.displayManager.sddm.sugarCandyNix = {
       enable = true; # This enables SDDM automatically and set its theme to
                      # "sddm-sugar-candy-nix"
       settings = {
@@ -263,18 +259,18 @@ locale setting in your login screen.*
 
 `HourFormat = "HH:mm";`
 *Defaults to Locale.ShortFormat - Accepts "long" or a custom string like
-"hh:mm A". See [http://doc.qt.io/qt-5/qml-qtqml-date.html]*
+"hh:mm A". See \[http://doc.qt.io/qt-5/qml-qtqml-date.html\]*
 
 `DateFormat = "dddd, d of MMMM";`
 *Defaults to Locale.LongFormat - Accepts "short" or a custom string like
-"dddd, d 'of' MMMM". See [http://doc.qt.io/qt-5/qml-qtqml-date.html]*
+"dddd, d 'of' MMMM". See \[http://doc.qt.io/qt-5/qml-qtqml-date.html\]*
 
 `HeaderText = "Welcome!";`
 *Header can be empty to not display any greeting at all. Keep it short.*
 
 *SDDM may lack proper translation for every element. Sugar defaults to SDDM
 translations. Please help translate SDDM as much as possible for your language:
-[https://github.com/sddm/sddm/wiki/Localization]. These are in order as they
+\[https://github.com/sddm/sddm/wiki/Localization\]. These are in order as they
 appear on screen.*
 
 `TranslatePlaceholderUsername = "";`
@@ -321,7 +317,6 @@ WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with
-Sugar Candy. If not, see [https://www.gnu.org/licenses/].
+Sugar Candy. If not, see \[https://www.gnu.org/licenses/\].
 
 *Redistributed by Virgil Ribeyre, under the same license. 2023.*
-

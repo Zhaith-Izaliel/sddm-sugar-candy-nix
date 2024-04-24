@@ -5,7 +5,7 @@ inputs: {
   pkgs,
   ...
 }: let
-  inherit (lib) mkOption mapAttrsToList concatStrings boolToString types mkRenamedOptionModule mkEnableOption mdDoc;
+  inherit (lib) mkIf mkOption mapAttrsToList concatStrings boolToString types mkRenamedOptionModule mkEnableOption mdDoc;
 
   # Config
   cfg = config.services.displayManager.sddm.sugarCandyNix;
@@ -146,9 +146,9 @@ in {
         example = "right";
         description = mdDoc ''
           Horizontal position of the background picture relative to its visible area. 
-            
+          
           Applies when `ScaleImageCropped` is set to false or when `HaveFormBackground` is set to true and `FormPosition` is either left or right.
-            
+          
           Can be left, center or right.'';
         type = types.enum ["center" "left" "center"];
       };
@@ -158,9 +158,9 @@ in {
         example = "right";
         description = mdDoc ''
           Vertical position of the background picture relative to its visible area. 
-            
+          
           Applies when `scaleimagecropped` is set to false or when `HaveFormBackground` is set to true and `FormPosition` is either left or right. 
-            
+          
           Can be left, center or right.'';
         type = types.enum ["center" "left" "right"];
       };
@@ -387,25 +387,14 @@ in {
     };
   };
 
-  config =
-    lib.mkIf cfg.enable {
-      environment.systemPackages = [
-        cfg.package
-      ];
-    }
-    // (
-      if builtins.hasAttr "sddm" options.services.displayManager
-      then {
-        services.displayManager.sddm = {
-          enable = true;
-          theme = "sddm-sugar-candy-nix";
-        };
-      }
-      else {
-        services.xserver.displayManager.sddm = {
-          enable = true;
-          theme = "sddm-sugar-candy-nix";
-        };
-      }
-    );
+  config = mkIf cfg.enable {
+    environment.systemPackages = [
+      cfg.package
+    ];
+
+    services.displayManager.sddm = {
+      enable = true;
+      theme = "sddm-sugar-candy-nix";
+    };
+  };
 }

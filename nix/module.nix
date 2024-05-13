@@ -394,7 +394,7 @@ in {
       ];
     }
     (
-      if builtins.hasAttr config.services "displayManager"
+      if builtins.hasAttr "displayManager" options.services
       then {
         services.displayManager.sddm = {
           enable = true;

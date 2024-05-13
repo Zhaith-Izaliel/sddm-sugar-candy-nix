@@ -42,8 +42,8 @@ inputs: {
   };
 in {
   imports = [
-    (mkRenamedOptionModule ["services" "xserver" "displayManager" "sddm" "sugarCandyNix" "enable"] ["services" "displayManager" "sddm" "sugarCandyNix" "enable"])
-    (mkRenamedOptionModule ["services" "xserver" "displayManager" "sddm" "sugarCandyNix" "settings"] ["services" "displayManager" "sddm" "sugarCandyNix" "settings"])
+    # (mkRenamedOptionModule ["services" "xserver" "displayManager" "sddm" "sugarCandyNix" "enable"] ["services" "displayManager" "sddm" "sugarCandyNix" "enable"])
+    # (mkRenamedOptionModule ["services" "xserver" "displayManager" "sddm" "sugarCandyNix" "settings"] ["services" "displayManager" "sddm" "sugarCandyNix" "settings"])
   ];
 
   options.services.displayManager.sddm.sugarCandyNix = {
@@ -405,7 +405,7 @@ in {
           services.xserver.displayManager.sddm = attr;
         }
         else {
-          services.xserver.displayManager.sddm = attr;
+          services.displayManager.sddm = attr;
         }
     )
   ]);

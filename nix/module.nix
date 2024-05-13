@@ -42,8 +42,8 @@ inputs: {
   };
 in {
   imports = [
-    # (mkRenamedOptionModule ["services" "xserver" "displayManager" "sddm" "sugarCandyNix" "enable"] ["services" "displayManager" "sddm" "sugarCandyNix" "enable"])
-    # (mkRenamedOptionModule ["services" "xserver" "displayManager" "sddm" "sugarCandyNix" "settings"] ["services" "displayManager" "sddm" "sugarCandyNix" "settings"])
+    (mkRenamedOptionModule ["services" "xserver" "displayManager" "sddm" "sugarCandyNix" "enable"] ["services" "displayManager" "sddm" "sugarCandyNix" "enable"])
+    (mkRenamedOptionModule ["services" "xserver" "displayManager" "sddm" "sugarCandyNix" "settings"] ["services" "displayManager" "sddm" "sugarCandyNix" "settings"])
   ];
 
   options.services.displayManager.sddm.sugarCandyNix = {
@@ -395,17 +395,14 @@ in {
     }
     (
       let
-        attr = {
-          enable = true;
-          theme = "sddm-sugar-candy-nix";
-        };
+        theme = "sddm-sugar-candy-nix";
       in
         if !(builtins.hasAttr "displayManager" options.services)
         then {
-          services.xserver.displayManager.sddm = attr;
+          services.xserver.displayManager.sddm.theme = theme;
         }
         else {
-          services.displayManager.sddm = attr;
+          services.displayManager.sddm.theme = theme;
         }
     )
   ]);

@@ -5,7 +5,7 @@ inputs: {
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkOption mapAttrsToList concatStrings boolToString types mkRenamedOptionModule mkEnableOption mdDoc;
+  inherit (lib) mkIf mkMerge mkOption mapAttrsToList concatStrings boolToString types mkRenamedOptionModule mkEnableOption mdDoc;
 
   # Config
   cfg = config.services.displayManager.sddm.sugarCandyNix;
@@ -146,9 +146,9 @@ in {
         example = "right";
         description = mdDoc ''
           Horizontal position of the background picture relative to its visible area. 
-                  
+            
           Applies when `ScaleImageCropped` is set to false or when `HaveFormBackground` is set to true and `FormPosition` is either left or right.
-                  
+            
           Can be left, center or right.'';
         type = types.enum ["center" "left" "center"];
       };
@@ -158,9 +158,9 @@ in {
         example = "right";
         description = mdDoc ''
           Vertical position of the background picture relative to its visible area. 
-                  
+            
           Applies when `scaleimagecropped` is set to false or when `HaveFormBackground` is set to true and `FormPosition` is either left or right. 
-                  
+            
           Can be left, center or right.'';
         type = types.enum ["center" "left" "right"];
       };
@@ -387,13 +387,13 @@ in {
     };
   };
 
-  config =
-    mkIf cfg.enable {
+  config = mkIf cfg.enable (mkMerge [
+    {
       environment.systemPackages = [
         cfg.package
       ];
     }
-    // (
+    (
       if builtins.hasAttr config.services "displayManager"
       then {
         services.displayManager.sddm = {
@@ -407,5 +407,6 @@ in {
           theme = "sddm-sugar-candy-nix";
         };
       }
-    );
+    )
+  ]);
 }

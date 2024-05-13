@@ -405,7 +405,7 @@ in {
           services.xserver.displayManager.sddm = attr;
         }
         else {
-          services.displayManager.sddm = attr;
+          services.xserver.displayManager.sddm = attr;
         }
     )
   ]);

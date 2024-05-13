@@ -146,9 +146,9 @@ in {
         example = "right";
         description = mdDoc ''
           Horizontal position of the background picture relative to its visible area. 
-          
+            
           Applies when `ScaleImageCropped` is set to false or when `HaveFormBackground` is set to true and `FormPosition` is either left or right.
-          
+            
           Can be left, center or right.'';
         type = types.enum ["center" "left" "center"];
       };
@@ -158,9 +158,9 @@ in {
         example = "right";
         description = mdDoc ''
           Vertical position of the background picture relative to its visible area. 
-          
+            
           Applies when `scaleimagecropped` is set to false or when `HaveFormBackground` is set to true and `FormPosition` is either left or right. 
-          
+            
           Can be left, center or right.'';
         type = types.enum ["center" "left" "right"];
       };
@@ -387,14 +387,25 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
-    environment.systemPackages = [
-      cfg.package
-    ];
-
-    services.displayManager.sddm = {
-      enable = true;
-      theme = "sddm-sugar-candy-nix";
-    };
-  };
+  config =
+    mkIf cfg.enable {
+      environment.systemPackages = [
+        cfg.package
+      ];
+    }
+    // (
+      if builtins.hasAttrs config.services "displayManager"
+      then {
+        services.displayManager.sddm = {
+          enable = true;
+          theme = "sddm-sugar-candy-nix";
+        };
+      }
+      else {
+        services.xserver.displayManager.sddm = {
+          enable = true;
+          theme = "sddm-sugar-candy-nix";
+        };
+      }
+    );
 }

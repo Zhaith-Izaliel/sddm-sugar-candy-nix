@@ -146,9 +146,9 @@ in {
         example = "right";
         description = mdDoc ''
           Horizontal position of the background picture relative to its visible area. 
-                  
+                
           Applies when `ScaleImageCropped` is set to false or when `HaveFormBackground` is set to true and `FormPosition` is either left or right.
-                  
+                
           Can be left, center or right.'';
         type = types.enum ["center" "left" "center"];
       };
@@ -158,9 +158,9 @@ in {
         example = "right";
         description = mdDoc ''
           Vertical position of the background picture relative to its visible area. 
-                  
+                
           Applies when `scaleimagecropped` is set to false or when `HaveFormBackground` is set to true and `FormPosition` is either left or right. 
-                  
+                
           Can be left, center or right.'';
         type = types.enum ["center" "left" "right"];
       };
@@ -394,19 +394,19 @@ in {
       ];
     }
     (
-      if builtins.hasAttr "displayManager" options.services.xserver
-      then {
-        services.xserver.displayManager.sddm = {
+      let
+        attr = {
           enable = true;
           theme = "sddm-sugar-candy-nix";
         };
-      }
-      else {
-        services.displayManager.sddm = {
-          enable = true;
-          theme = "sddm-sugar-candy-nix";
-        };
-      }
+      in
+        if !(builtins.hasAttr "sddm" options.services.displayManager)
+        then {
+          services.xserver.displayManager.sddm = attr;
+        }
+        else {
+          services.displayManager.sddm = attr;
+        }
     )
   ]);
 }

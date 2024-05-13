@@ -402,7 +402,7 @@ in {
           services.xserver.displayManager.sddm.theme = theme;
         }
         else {
-          services.displayManager.sddm.theme = theme;
+          services.xserver.displayManager.sddm.theme = theme;
         }
     )
   ]);

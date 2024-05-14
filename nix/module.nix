@@ -387,23 +387,23 @@ in {
     };
   };
 
-  config = mkIf cfg.enable (mkMerge [
-    {
+  config = mkMerge [
+    (mkIf cfg.enable {
       environment.systemPackages = [
         cfg.package
       ];
-    }
-    (
+    })
+    (mkIf cfg.enable (
       let
         theme = "sddm-sugar-candy-nix";
       in
-        if !(builtins.hasAttr "displayManager" options.services)
+        if !(builtins.hasAttr "theme" options.services.displayManager.sddm)
         then {
           services.xserver.displayManager.sddm.theme = theme;
         }
         else {
-          services.xserver.displayManager.sddm.theme = theme;
+          services.displayManager.sddm.theme = theme;
         }
-    )
-  ]);
+    ))
+  ];
 }

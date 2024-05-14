@@ -5,7 +5,7 @@ inputs: {
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkMerge mkOption mapAttrsToList concatStrings boolToString types mkRenamedOptionModule mkEnableOption mdDoc;
+  inherit (lib) mkIf mkOption mapAttrsToList concatStrings boolToString types mkRenamedOptionModule mkEnableOption mdDoc;
 
   # Config
   cfg = config.services.displayManager.sddm.sugarCandyNix;
@@ -387,13 +387,12 @@ in {
     };
   };
 
-  config = mkMerge [
-    (mkIf cfg.enable {
+  config = mkIf cfg.enable ({
       environment.systemPackages = [
         cfg.package
       ];
-    })
-    (mkIf cfg.enable (
+    }
+    // (
       let
         theme = "sddm-sugar-candy-nix";
       in
@@ -404,6 +403,5 @@ in {
         else {
           services.displayManager.sddm.theme = theme;
         }
-    ))
-  ];
+    ));
 }

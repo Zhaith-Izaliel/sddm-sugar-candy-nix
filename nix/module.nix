@@ -5,7 +5,7 @@ inputs: {
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkOption mapAttrsToList concatStrings boolToString types mkRenamedOptionModule mkEnableOption mdDoc;
+  inherit (lib) mkIf mkOption mapAttrsToList concatStrings boolToString types mkEnableOption mdDoc;
 
   # Config
   cfg = config.services.displayManager.sddm.sugarCandyNix;
@@ -41,11 +41,6 @@ inputs: {
     themeConf = "${theme-conf-file}";
   };
 in {
-  imports = [
-    (mkRenamedOptionModule ["services" "xserver" "displayManager" "sddm" "sugarCandyNix" "enable"] ["services" "displayManager" "sddm" "sugarCandyNix" "enable"])
-    (mkRenamedOptionModule ["services" "xserver" "displayManager" "sddm" "sugarCandyNix" "settings"] ["services" "displayManager" "sddm" "sugarCandyNix" "settings"])
-  ];
-
   options.services.displayManager.sddm.sugarCandyNix = {
     enable = mkEnableOption "SDDM Sugar Candy Theme";
 
@@ -387,21 +382,10 @@ in {
     };
   };
 
-  config = mkIf cfg.enable ({
-      environment.systemPackages = [
-        cfg.package
-      ];
-    }
-    // (
-      let
-        theme = "sddm-sugar-candy-nix";
-      in
-        if !(builtins.hasAttr "theme" options.services.displayManager.sddm)
-        then {
-          services.xserver.displayManager.sddm.theme = theme;
-        }
-        else {
-          services.displayManager.sddm.theme = theme;
-        }
-    ));
+  config = mkIf cfg.enable {
+    environment.systemPackages = [
+      cfg.package
+    ];
+    services.displayManager.sddm.theme = "sddm-sugar-candy-nix";
+  };
 }

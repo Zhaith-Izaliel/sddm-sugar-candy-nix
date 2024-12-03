@@ -3,7 +3,7 @@
   NixOS";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
   };
 
   outputs = inputs @ {
@@ -25,20 +25,21 @@
           self.overlays.sddm-sugar-candy-nix
         ];
       });
-  in
-  {
-    packages = genSystems (system:
-      (self.overlays.default pkgsFor.${system} pkgsFor.${system})
-      // {
-        default = self.packages.${system}.sddm-sugar-candy-nix;
-      }
+  in {
+    packages = genSystems (
+      system:
+        (self.overlays.default pkgsFor.${system} pkgsFor.${system})
+        // {
+          default = self.packages.${system}.sddm-sugar-candy-nix;
+        }
     );
 
-    overlays = (import ./nix/overlays.nix {}) // {
-      default = self.overlays.sddm-sugar-candy-nix;
-    };
+    overlays =
+      (import ./nix/overlays.nix {})
+      // {
+        default = self.overlays.sddm-sugar-candy-nix;
+      };
 
     nixosModules.default = import ./nix/module.nix inputs;
   };
 }
-

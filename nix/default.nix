@@ -36,6 +36,10 @@ stdenv.mkDerivation rec {
     qtquickcontrols2
   ];
 
+  buildInputs = [
+    qtgraphicaleffects
+  ];
+
   nativeBuildInputs = [
     coreutils
   ];

@@ -1,20 +1,20 @@
 {
-  stdenv,
+  stdenvNoCC,
   lib,
-  coreutils,
   sddm,
   qtbase,
   qtsvg,
   qtquickcontrols2,
   qtgraphicaleffects,
+  wrapQtAppsHook,
   version ? "git",
   themeConf ? ../theme.conf,
 }:
-stdenv.mkDerivation rec {
+stdenvNoCC.mkDerivation rec {
   pname = "sddm-sugar-candy-nix";
   inherit version;
 
-  dontWrapQtApps = true;
+  dontBuild = true;
 
   src = lib.cleanSourceWith {
     filter = name: type:
@@ -37,7 +37,7 @@ stdenv.mkDerivation rec {
   ];
 
   nativeBuildInputs = [
-    coreutils
+    wrapQtAppsHook
   ];
 
   installPhase = ''

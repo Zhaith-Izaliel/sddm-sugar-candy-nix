@@ -1,6 +1,5 @@
 inputs: {
   config,
-  options,
   lib,
   pkgs,
   ...
@@ -104,7 +103,7 @@ in {
         default = false;
         example = true;
         description = mdDoc ''
-          Wether to enable the partial blur effect.
+          Whether to enable the partial blur effect.
 
           If `HaveFormBackground` is enabled then `PartialBlur` will trigger the `BackgroundColor` of the form element to be partially transparent and blend with the blur.
         '';
@@ -259,7 +258,7 @@ in {
       FontSize = mkOption {
         default = "";
         example = "14";
-        description = "Only set a fixed value if fonts are way too small for your resolution. Preferrably kept empty.";
+        description = "Only set a fixed value if fonts are way too small for your resolution. Preferably kept empty.";
         type = types.str;
       };
 
@@ -319,7 +318,7 @@ in {
         description = mdDoc ''
           The time and date locale should usually be set in your system settings.
 
-          Only hard set this if something is not working by default or you want a seperate locale setting in your login screen.
+          Only hard set this if something is not working by default or you want a separate locale setting in your login screen.
         '';
         type = types.str;
       };
@@ -361,7 +360,7 @@ in {
 
       TranslateLogin = mkTranslationOption "login" "Connexion";
 
-      TranslateLoginFailedWarning = mkTranslationOption "the login failed warning" "Echec de l'authentification";
+      TranslateLoginFailedWarning = mkTranslationOption "the login failed warning" "Echec de l'authentication";
 
       TranslateCapslockWarning = mkTranslationOption "the caps lock warning" "Verr. Maj. actif";
 

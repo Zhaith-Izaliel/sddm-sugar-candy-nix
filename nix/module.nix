@@ -4,7 +4,7 @@ inputs: {
   pkgs,
   ...
 }: let
-  inherit (lib) mkIf mkOption mapAttrsToList concatStrings boolToString types mkEnableOption mdDoc;
+  inherit (lib) mkIf mkOption mapAttrsToList concatStrings boolToString types mkEnableOption;
 
   # Config
   cfg = config.services.displayManager.sddm.sugarCandyNix;
@@ -45,7 +45,7 @@ in {
 
     package = mkOption {
       default = defaultPackage;
-      description = mdDoc ''
+      description = ''
         The SDDM Sugar Candy Theme to use.
 
         Setting this option will make {option}`services.displayManager.sddm.sugarCandy.settings` not work.
@@ -102,7 +102,7 @@ in {
       PartialBlur = mkOption {
         default = false;
         example = true;
-        description = mdDoc ''
+        description = ''
           Whether to enable the partial blur effect.
 
           If `HaveFormBackground` is enabled then `PartialBlur` will trigger the `BackgroundColor` of the form element to be partially transparent and blend with the blur.
@@ -138,7 +138,7 @@ in {
       BackgroundImageHAlignment = mkOption {
         default = "center";
         example = "right";
-        description = mdDoc ''
+        description = ''
           Horizontal position of the background picture relative to its visible area. 
 
           Applies when `ScaleImageCropped` is set to false or when `HaveFormBackground` is set to true and `FormPosition` is either left or right.
@@ -150,7 +150,7 @@ in {
       BackgroundImageVAlignment = mkOption {
         default = "center";
         example = "right";
-        description = mdDoc ''
+        description = ''
           Vertical position of the background picture relative to its visible area. 
 
           Applies when `ScaleImageCropped` is set to false or when `HaveFormBackground` is set to true and `FormPosition` is either left or right. 
@@ -162,7 +162,7 @@ in {
       MainColor = mkOption {
         default = "white";
         example = "#444";
-        description = mdDoc ''
+        description = ''
           Used for all elements when not focused/hovered etc.
 
           Usually the best effect is achieved by having this be either white or a very dark grey like #444 (not black for smoother antialias).
@@ -174,7 +174,7 @@ in {
       AccentColor = mkOption {
         default = "#fb884f";
         example = "#38f8dd";
-        description = mdDoc ''
+        description = ''
           Used for elements in focus/hover/pressed.
 
           Should be contrasting to the background and the `MainColor` to achieve the best effect.
@@ -185,7 +185,7 @@ in {
       BackgroundColor = mkOption {
         default = "#444";
         example = "#adfddd";
-        description = mdDoc ''
+        description = ''
           Used for the user and session selection background as well as for `ScreenPadding` and `FormBackground` when either is true.
 
           If `PartialBlur` and `FormBackground` are both enabled this color will blend with the blur effect.
@@ -240,7 +240,7 @@ in {
       ScreenPadding = mkOption {
         default = 0;
         example = 10;
-        description = mdDoc ''
+        description = ''
           Integer in pixels. Increase or set this to 0 to have a padding of color `BackgroundColor` all around your screen.
 
           This makes your login greeter appear as if it was a canvas.
@@ -265,7 +265,7 @@ in {
       ForceRightToLeft = mkOption {
         default = false;
         example = true;
-        description = mdDoc ''
+        description = ''
           Revert the layout either because you would like the login to be on the right hand side or SDDM won't respect your language locale for some reason.
 
           This will reverse the current position of `FormPosition` if it is either left or right and in addition position some smaller elements on the right hand side of the form itself (also when FormPosition is set to center).
@@ -297,7 +297,7 @@ in {
       ForceHideVirtualKeyboardButton = mkOption {
         default = false;
         example = true;
-        description = mdDoc ''
+        description = ''
           Do not show the button for the virtual keyboard at all.
 
           This will completely disable functionality for the virtual keyboard even if it is installed and activated in sddm.conf
@@ -315,7 +315,7 @@ in {
       Locale = mkOption {
         default = "";
         example = "fr";
-        description = mdDoc ''
+        description = ''
           The time and date locale should usually be set in your system settings.
 
           Only hard set this if something is not working by default or you want a separate locale setting in your login screen.
@@ -326,7 +326,7 @@ in {
       HourFormat = mkOption {
         default = "HH:mm";
         example = "HH:mm:ss";
-        description = mdDoc ''
+        description = ''
           Defaults to Locale.ShortFormat - Accepts "long" or a custom string like "hh:mm A".
 
           See http://doc.qt.io/qt-5/qml-qtqml-date.html
@@ -337,7 +337,7 @@ in {
       DateFormat = mkOption {
         default = "dddd, d of MMMM";
         example = "dddd";
-        description = mdDoc ''
+        description = ''
           Defaults to Locale.LongFormat - Accepts "short" or a custom string like "dddd, d 'of' MMMM".
 
           See http://doc.qt.io/qt-5/qml-qtqml-date.html

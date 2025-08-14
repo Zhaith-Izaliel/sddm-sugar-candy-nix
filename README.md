@@ -320,4 +320,4 @@ A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 Sugar Candy. If not, see \[https://www.gnu.org/licenses/\].
 
-*Redistributed by Virgil Ribeyre, under the same license. 2023.*
+*Redistributed by Zhaith Izaliel, under the same license. 2023.*

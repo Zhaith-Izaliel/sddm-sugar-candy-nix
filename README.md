@@ -91,17 +91,11 @@ outputs = { self, nixpkgs, sddm-sugar-candy-nix }: {
 
 ## Caveats
 
-My knowledge with Nix and NixOS is limited and as such the module and package
-are imperfect. Hence, there are some caveats to take into considerations:
-
-1. Due to the nature of the theme, its configuration lives in `theme.conf`. As
-   such the module will override the derivation to create a new `theme.conf`
-   containing your configuration leading to **a complete rebuild and download of
-   the theme**. I advise you to run `nix-collect-garbage` when testing some
-   configurations of the theme as it will steadily fill up your Nix store.
-
-If you have any idea on how to fix these issues, please, feel free to make a
-Pull Request. Thank you 💕
+Due to the nature of the theme, its configuration lives in `theme.conf`. As such
+the module will override the derivation to create a new `theme.conf` containing
+your configuration leading to **a complete rebuild and download of the theme**.
+I advise you to run `nix-collect-garbage` when testing some configurations of
+the theme as it will steadily fill up your Nix store.
 
 ## Configuration
 

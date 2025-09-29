@@ -36,7 +36,11 @@ inputs = {
   # ---Snip---
   sddm-sugar-candy-nix = {
     url = "gitlab:Zhaith-Izaliel/sddm-sugar-candy-nix";
-    # Optional, by default this flake follows nixpkgs-unstable.
+    # Optional, by default this flake follows the latest nixpkgs-stable.
+    # ---
+    # Note that setting this will make it follow your version of nixpkgs, which
+    # can lead to issue if you lock it to nixpkgs-unstable. If you don't add this
+    # line, the derivation will be bigger, but will work Out Of the Box.
     inputs.nixpkgs.follows = "nixpkgs";
   };
   # ---Snip---
@@ -76,6 +80,14 @@ outputs = { self, nixpkgs, sddm-sugar-candy-nix }: {
   };
 };
 ```
+
+> [!WARNING]
+> This flake follows the latest stable version of Nixpkgs. This
+>does not mean it necessarily follows the latest commit of Nixpkgs Stable.  You
+>may want to override it by setting `inputs.nixpkgs.follows` in your flake
+>input, however this flake **is not tested with unstable**.
+>
+>Do it at your own risk.
 
 ## Caveats
 

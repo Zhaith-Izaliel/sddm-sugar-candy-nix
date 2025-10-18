@@ -18,26 +18,16 @@
           default = pkgs.mkShell {
             nativeBuildInputs = with pkgs; [
               kdePackages.sddm
-              kdePackages.qtbase
-              kdePackages.qt5compat
-              kdePackages.qtsvg
-              makeWrapper
+              pkgs.libsForQt5.qtgraphicaleffects
+              pkgs.libsForQt5.qtbase
+              pkgs.libsForQt5.qtquickcontrols2
+              pkgs.libsForQt5.qtsvg
             ];
-
-            # shellHook = ''
-            #   # Add Qt-related environment variables.
-            #   # https://discourse.nixos.org/t/qt-development-environment-on-a-flake-system/23707/5
-            #   setQtEnvironment=$(mktemp)
-            #   random=$(openssl rand -base64 20 | sed "s/[^a-zA-Z0-9]//g")
-            #   makeShellWrapper "$(type -p sh)" "$setQtEnvironment" "''${qtWrapperArgs[@]}" --argv0 "$random"
-            #   sed "/$random/d" -i "$setQtEnvironment"
-            #   source "$setQtEnvironment"
-            # '';
           };
         };
 
         packages = {
-          default = pkgs.kdePackages.callPackage ./nix {inherit version;};
+          default = pkgs.callPackage ./nix {inherit version;};
         };
       };
 

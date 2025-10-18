@@ -1,10 +1,7 @@
 {
   stdenvNoCC,
   lib,
-  qtsvg,
-  qtbase,
-  qt5compat,
-  wrapQtAppsHook,
+  pkgs,
   version ? "git",
   themeConf ? ../theme.conf,
 }:
@@ -26,14 +23,15 @@ stdenvNoCC.mkDerivation rec {
     };
   };
 
-  nativeBuildInputs = [
-    wrapQtAppsHook
-  ];
-
-  propagatedBuildInputs = [
+  propagatedUserEnvPkgs = with pkgs.libsForQt5; [
     qtsvg
     qtbase
-    qt5compat
+    qtgraphicaleffects
+    qtquickcontrols2
+  ];
+
+  nativeBuildInputs = with pkgs.libsForQt5; [
+    wrapQtAppsHook
   ];
 
   installPhase = ''

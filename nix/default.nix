@@ -2,6 +2,7 @@
   stdenvNoCC,
   lib,
   qtsvg,
+  qtbase,
   wrapQtAppsHook,
   version ? "git",
   themeConf ? ../theme.conf,
@@ -26,6 +27,12 @@ stdenvNoCC.mkDerivation rec {
 
   propagatedUserEnvPkgs = [
     qtsvg
+    qtbase
+  ];
+
+  buildInputs = [
+    qtsvg
+    qtbase
   ];
 
   nativeBuildInputs = [

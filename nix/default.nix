@@ -1,11 +1,7 @@
 {
   stdenvNoCC,
   lib,
-  sddm,
-  qtbase,
   qtsvg,
-  qtquickcontrols2,
-  qtgraphicaleffects,
   wrapQtAppsHook,
   version ? "git",
   themeConf ? ../theme.conf,
@@ -29,11 +25,7 @@ stdenvNoCC.mkDerivation rec {
   };
 
   propagatedUserEnvPkgs = [
-    sddm
-    qtbase
     qtsvg
-    qtgraphicaleffects
-    qtquickcontrols2
   ];
 
   nativeBuildInputs = [

@@ -2,8 +2,7 @@
   props = builtins.fromJSON (builtins.readFile ../props.json);
 in {
   sddm-sugar-candy-nix = final: prev: {
-    sddm-sugar-candy-nix = prev.libsForQt5.callPackage ./default.nix {
-      sddm = prev.kdePackages.sddm;
+    sddm-sugar-candy-nix = prev.kdePackages.callPackage ./default.nix {
       version = props.version;
     };
   };

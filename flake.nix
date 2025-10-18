@@ -3,12 +3,12 @@
   NixOS";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
   };
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} ({withSystem, ...}: let
-      version = "2.10.2";
+      version = "2.11.0";
     in {
       systems = ["x86_64-linux" "aarch64-linux"];
 

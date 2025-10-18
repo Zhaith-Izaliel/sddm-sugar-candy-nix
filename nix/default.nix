@@ -3,7 +3,6 @@
   lib,
   qtsvg,
   qtbase,
-  wrapQtAppsHook,
   version ? "git",
   themeConf ? ../theme.conf,
 }:
@@ -25,26 +24,23 @@ stdenvNoCC.mkDerivation rec {
     };
   };
 
-  propagatedUserEnvPkgs = [
+  dontWrapQtApps = true;
+
+  propagatedBuildInputs = [
     qtsvg
     qtbase
-  ];
-
-  buildInputs = [
-    qtsvg
-    qtbase
-  ];
-
-  nativeBuildInputs = [
-    wrapQtAppsHook
   ];
 
   installPhase = ''
+    runHook preInstall
+
     local installDir=$out/share/sddm/themes/${pname}
     mkdir -p $installDir
     cp -aR -t $installDir Main.qml Assets Components metadata.desktop theme.conf Backgrounds
 
     # Applying theme
     cat "${themeConf}" > "$installDir/theme.conf"
+
+    runHook postInstall
   '';
 }

@@ -1,4 +1,4 @@
-inputs: {
+{sddm-sugar-candy-nix}: {
   config,
   lib,
   pkgs,
@@ -36,7 +36,7 @@ inputs: {
       cfg.settings);
 
   # Final Package
-  defaultPackage = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
+  defaultPackage = sddm-sugar-candy-nix.override {
     themeConf = "${theme-conf-file}";
   };
 in {
@@ -50,7 +50,7 @@ in {
 
         Setting this option will make {option}`services.displayManager.sddm.sugarCandy.settings` not work.
       '';
-      type = types.path;
+      type = types.package;
     };
 
     settings = {

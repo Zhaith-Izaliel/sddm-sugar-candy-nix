@@ -4,7 +4,6 @@
   qtsvg,
   qtbase,
   qt5compat,
-  qtdeclarative,
   wrapQtAppsHook,
   version ? "git",
   themeConf ? ../theme.conf,
@@ -31,11 +30,10 @@ stdenvNoCC.mkDerivation rec {
     wrapQtAppsHook
   ];
 
-  buildInputs = [
+  propagatedBuildInputs = [
     qtsvg
     qtbase
     qt5compat
-    qtdeclarative
   ];
 
   installPhase = ''

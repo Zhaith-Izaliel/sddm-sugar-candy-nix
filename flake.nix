@@ -6,40 +6,43 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    ...
-  }: let
-    lib = nixpkgs.lib;
-    genSystems = lib.genAttrs [
-      # Add more systems if they are supported
-      "aarch64-linux"
-      "x86_64-linux"
-    ];
+  outputs = inputs @ {flake-parts, ...}:
+    flake-parts.lib.mkFlake {inherit inputs;} ({withSystem, ...}: let
+      version = "2.10.2";
+    in {
+      systems = ["x86_64-linux" "aarch64-linux"];
 
-    pkgsFor = genSystems (system:
-      import nixpkgs {
-        inherit system;
-        overlays = [
-          self.overlays.sddm-sugar-candy-nix
-        ];
-      });
-  in {
-    packages = genSystems (
-      system:
-        (self.overlays.default pkgsFor.${system} pkgsFor.${system})
-        // {
-          default = self.packages.${system}.sddm-sugar-candy-nix;
-        }
-    );
+      perSystem = {pkgs, ...}: {
+        devShells = {
+          # nix develop
+          default = pkgs.mkShell {
+            nativeBuildInputs = with pkgs; [
+              kdePackages.sddm
+              # kdePackages.qtbase
+              # kdePackages.qt5compat
+              qt6.full
+              qt6.qtbase
+              qt6.qtsvg
+              # kdePackages.qtsvg
+            ];
+          };
+        };
 
-    overlays =
-      (import ./nix/overlays.nix {})
-      // {
-        default = self.overlays.sddm-sugar-candy-nix;
+        packages = {
+          default = pkgs.kdePackages.callPackage ./nix {inherit version;};
+        };
       };
 
-    nixosModules.default = import ./nix/module.nix inputs;
-  };
+      flake = {
+        overlays.default = final: prev: let
+          packages = withSystem prev.stdenv.hostPlatform.system ({config, ...}: config.packages);
+        in {sddm-sugar-candy-nix = packages.default;};
+
+        nixosModules.default = {pkgs, ...}: let
+          module = import ./nix/module.nix {sddm-sugar-candy-nix = withSystem pkgs.stdenv.hostPlatform.system ({config, ...}: config.packages.default);};
+        in {
+          imports = [module];
+        };
+      };
+    });
 }

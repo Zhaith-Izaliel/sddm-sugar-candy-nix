@@ -3,6 +3,9 @@
   lib,
   qtsvg,
   qtbase,
+  qt5compat,
+  qtdeclarative,
+  wrapQtAppsHook,
   version ? "git",
   themeConf ? ../theme.conf,
 }:
@@ -24,11 +27,15 @@ stdenvNoCC.mkDerivation rec {
     };
   };
 
-  dontWrapQtApps = true;
+  nativeBuildInputs = [
+    wrapQtAppsHook
+  ];
 
-  propagatedBuildInputs = [
+  buildInputs = [
     qtsvg
     qtbase
+    qt5compat
+    qtdeclarative
   ];
 
   installPhase = ''

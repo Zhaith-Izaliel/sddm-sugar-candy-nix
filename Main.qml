@@ -25,7 +25,7 @@
 import QtQuick 2.11
 import QtQuick.Layouts 1.11
 import QtQuick.Controls 2.4
-import Qt5Compat.GraphicalEffects 1.0
+import QtGraphicalEffects 1.0
 import "Components"
 
 Pane {

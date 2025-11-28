@@ -24,7 +24,7 @@
 
 import QtQuick 2.11
 import QtQuick.Controls 2.4
-import Qt5Compat.QtGraphicalEffects 1.0
+import QtGraphicalEffects 1.0
 
 Item {
     id: usernameField

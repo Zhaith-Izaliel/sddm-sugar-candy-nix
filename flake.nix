@@ -15,15 +15,20 @@
       perSystem = {pkgs, ...}: {
         devShells = {
           # nix develop
-          default = pkgs.mkShell {
-            nativeBuildInputs = with pkgs; [
-              kdePackages.sddm
-              pkgs.libsForQt5.qtgraphicaleffects
-              pkgs.libsForQt5.qtbase
-              pkgs.libsForQt5.qtquickcontrols2
-              pkgs.libsForQt5.qtsvg
-            ];
-          };
+          default = let
+            qtEnv = with pkgs.qt6;
+              env "qt-custom-${qtbase.version}" [
+                qtdeclarative
+                qtsvg
+                qt5compat
+              ];
+          in
+            pkgs.mkShell {
+              nativeBuildInputs = with pkgs; [
+                kdePackages.sddm
+                qtEnv
+              ];
+            };
         };
 
         packages = {

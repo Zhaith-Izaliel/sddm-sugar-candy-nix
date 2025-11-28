@@ -23,12 +23,18 @@ stdenvNoCC.mkDerivation rec {
     };
   };
 
-  propagatedUserEnvPkgs = with pkgs.libsForQt5; [
-    qtsvg
-    qtbase
-    qtgraphicaleffects
-    qtquickcontrols2
-  ];
+  propagatedUserEnvPkgs =
+    # (with pkgs.libsForQt5; [
+    #   qtsvg
+    #   qtbase
+    #   qtquickcontrols2
+    # ]) ++
+    with pkgs.kdePackages; [
+      qt5compat
+      qtsvg
+      qtbase
+      qtdeclarative
+    ];
 
   nativeBuildInputs = with pkgs.libsForQt5; [
     wrapQtAppsHook

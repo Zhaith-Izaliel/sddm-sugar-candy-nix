@@ -25,7 +25,7 @@
 import QtQuick 2.11
 import QtQuick.Layouts 1.11
 import QtQuick.Controls 2.4
-import QtGraphicalEffects 1.0
+import Qt5Compat.QtGraphicalEffects 1.0
 import "Components"
 
 Pane {
@@ -48,25 +48,13 @@ Pane {
     font.pointSize: config.FontSize !== "" ? config.FontSize : parseInt(height / 80)
     focus: true
 
-    property bool leftleft: config.HaveFormBackground == "true" &&
-                            config.PartialBlur == "false" &&
-                            config.FormPosition == "left" &&
-                            config.BackgroundImageHAlignment == "left"
+    property bool leftleft: config.HaveFormBackground == "true" && config.PartialBlur == "false" && config.FormPosition == "left" && config.BackgroundImageHAlignment == "left"
 
-    property bool leftcenter: config.HaveFormBackground == "true" &&
-                              config.PartialBlur == "false" &&
-                              config.FormPosition == "left" &&
-                              config.BackgroundImageHAlignment == "center"
+    property bool leftcenter: config.HaveFormBackground == "true" && config.PartialBlur == "false" && config.FormPosition == "left" && config.BackgroundImageHAlignment == "center"
 
-    property bool rightright: config.HaveFormBackground == "true" &&
-                              config.PartialBlur == "false" &&
-                              config.FormPosition == "right" &&
-                              config.BackgroundImageHAlignment == "right"
+    property bool rightright: config.HaveFormBackground == "true" && config.PartialBlur == "false" && config.FormPosition == "right" && config.BackgroundImageHAlignment == "right"
 
-    property bool rightcenter: config.HaveFormBackground == "true" &&
-                               config.PartialBlur == "false" &&
-                               config.FormPosition == "right" &&
-                               config.BackgroundImageHAlignment == "center"
+    property bool rightcenter: config.HaveFormBackground == "true" && config.PartialBlur == "false" && config.FormPosition == "right" && config.BackgroundImageHAlignment == "center"
 
     Item {
         id: sizeHelper
@@ -134,7 +122,9 @@ Pane {
             onKeyboardActiveChanged: keyboardActive ? state = "visible" : state = "hidden"
             width: parent.width
             z: 1
-            function switchState() { state = state == "hidden" ? "visible" : "hidden" }
+            function switchState() {
+                state = state == "hidden" ? "visible" : "hidden";
+            }
             states: [
                 State {
                     name: "visible"
@@ -153,7 +143,7 @@ Pane {
                     name: "hidden"
                     PropertyChanges {
                         target: virtualKeyboard
-                        y: root.height - root.height/4
+                        y: root.height - root.height / 4
                         opacity: 0
                     }
                 }
@@ -216,23 +206,13 @@ Pane {
 
             height: parent.height
             width: config.HaveFormBackground == "true" && config.FormPosition != "center" && config.PartialBlur != "true" ? parent.width - formBackground.width : parent.width
-            anchors.left: leftleft ||
-                          leftcenter ?
-                                formBackground.right : undefined
+            anchors.left: leftleft || leftcenter ? formBackground.right : undefined
 
-            anchors.right: rightright ||
-                           rightcenter ?
-                                formBackground.left : undefined
+            anchors.right: rightright || rightcenter ? formBackground.left : undefined
 
-            horizontalAlignment: config.BackgroundImageHAlignment == "left" ?
-                                 Image.AlignLeft :
-                                 config.BackgroundImageHAlignment == "right" ?
-                                 Image.AlignRight : Image.AlignHCenter
+            horizontalAlignment: config.BackgroundImageHAlignment == "left" ? Image.AlignLeft : config.BackgroundImageHAlignment == "right" ? Image.AlignRight : Image.AlignHCenter
 
-            verticalAlignment: config.BackgroundImageVAlignment == "top" ?
-                               Image.AlignTop :
-                               config.BackgroundImageVAlignment == "bottom" ?
-                               Image.AlignBottom : Image.AlignVCenter
+            verticalAlignment: config.BackgroundImageVAlignment == "top" ? Image.AlignTop : config.BackgroundImageVAlignment == "bottom" ? Image.AlignBottom : Image.AlignVCenter
 
             source: config.background || config.Background
             fillMode: config.ScaleImageCropped == "true" ? Image.PreserveAspectCrop : Image.PreserveAspectFit
@@ -254,7 +234,7 @@ Pane {
             width: form.width
             height: parent.height
             anchors.centerIn: form
-            sourceRect: Qt.rect(x,y,width,height)
+            sourceRect: Qt.rect(x, y, width, height)
             visible: config.FullBlur == "true" || config.PartialBlur == "true" ? true : false
         }
 

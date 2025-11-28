@@ -9,7 +9,7 @@ stdenvNoCC.mkDerivation rec {
   pname = "sddm-sugar-candy-nix";
   inherit version;
 
-  dontBuild = true;
+  dontWrapQtApps = true;
 
   src = lib.cleanSourceWith {
     filter = name: type:
@@ -23,15 +23,11 @@ stdenvNoCC.mkDerivation rec {
     };
   };
 
-  propagatedUserEnvPkgs = with pkgs.libsForQt5; [
+  buildInputs = with pkgs.libsForQt5; [
     qtsvg
     qtbase
     qtquickcontrols2
     qtgraphicaleffects
-  ];
-
-  nativeBuildInputs = with pkgs.libsForQt5; [
-    wrapQtAppsHook
   ];
 
   installPhase = ''

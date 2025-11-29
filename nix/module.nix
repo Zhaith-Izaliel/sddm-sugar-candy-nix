@@ -385,6 +385,6 @@ in {
     environment.systemPackages = [
       cfg.package
     ];
-    services.displayManager.sddm.theme = "${cfg.package}/share/sddm/themes/sddm-sugar-candy-nix";
+    services.displayManager.sddm.theme = "${cfg.package}/share/sddm/themes/sugar-candy";
   };
 }

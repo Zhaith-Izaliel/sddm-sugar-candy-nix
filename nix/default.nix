@@ -5,7 +5,7 @@
   version ? "git",
   themeConf ? ../theme.conf,
 }:
-stdenvNoCC.mkDerivation rec {
+stdenvNoCC.mkDerivation {
   pname = "sddm-sugar-candy-nix";
   inherit version;
 
@@ -23,9 +23,8 @@ stdenvNoCC.mkDerivation rec {
     };
   };
 
-  buildInputs = with pkgs.libsForQt5; [
+  propagatedBuildInputs = with pkgs.libsForQt5.qt5; [
     qtsvg
-    qtbase
     qtquickcontrols2
     qtgraphicaleffects
   ];
@@ -33,7 +32,7 @@ stdenvNoCC.mkDerivation rec {
   installPhase = ''
     runHook preInstall
 
-    local installDir=$out/share/sddm/themes/${pname}
+    local installDir=$out/share/sddm/themes/sugar-candy
     mkdir -p $installDir
     cp -aR -t $installDir Main.qml Assets Components metadata.desktop theme.conf Backgrounds
 

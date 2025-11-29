@@ -1,5 +1,11 @@
 ![Screenshot of the interface of the Sugar Candy theme for SDDM](Previews/PartialBlur.png "The default interface of the Sugar Candy theme for SDDM")
 
+# Archive Notice
+
+Since NixOS 25.11 landed SDDM has been rewritten for QT6 while this theme works only in QT5. Porting this theme to QT6 is out of the scope of this fork and I don't have the knowledge in QML yet to be able to do it. As such, I have to archive this fork.
+
+You can use another theme that is similar to this one (but works on QT6) and available in Nixpkgs: `sddm-astronaut`. 
+
 # Sugar Candy login theme for SDDM on NixOS
 
 This is a fork of the Sugar Candy login theme for SDDM made by Marian Arlt
